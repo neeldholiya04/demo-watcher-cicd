@@ -1,0 +1,9 @@
+{
+  "name": "demo-watcher-cicd",
+  "version": "1.0.0",
+  "description": "Demo repository for Kepler Watcher CI/CD post-change safeguards",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  }
+}
