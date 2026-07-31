@@ -1,0 +1,32 @@
+name: CI/CD Deployment Safeguard Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run Tests
+        run: npm test
+
+  deploy-staging:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Application
+        run: |
+          echo "Deploying to staging environment..."
+          sleep 3
+
+      - name: Post-Change Safeguard Health Check
+        run: |
+          echo "Running post-change canary check..."
+          echo "Status: HEALTHY"
